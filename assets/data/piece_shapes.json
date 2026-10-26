@@ -1,0 +1,137 @@
+{
+  "_comment": "Polyomino shape definitions for TastyBlast. Each shape is a list of cell offsets from the origin (0,0). Used by PieceSystem to generate tray pieces.",
+  "shapes": [
+    {
+      "id": "single",
+      "name": "Single",
+      "cells": [[0, 0]],
+      "weight": 10
+    },
+    {
+      "id": "domino_h",
+      "name": "Domino Horizontal",
+      "cells": [[0, 0], [1, 0]],
+      "weight": 8
+    },
+    {
+      "id": "domino_v",
+      "name": "Domino Vertical",
+      "cells": [[0, 0], [0, 1]],
+      "weight": 8
+    },
+    {
+      "id": "tromino_i_h",
+      "name": "Tromino I Horizontal",
+      "cells": [[0, 0], [1, 0], [2, 0]],
+      "weight": 6
+    },
+    {
+      "id": "tromino_i_v",
+      "name": "Tromino I Vertical",
+      "cells": [[0, 0], [0, 1], [0, 2]],
+      "weight": 6
+    },
+    {
+      "id": "tromino_l_1",
+      "name": "Tromino L (right)",
+      "cells": [[0, 0], [0, 1], [1, 1]],
+      "weight": 5
+    },
+    {
+      "id": "tromino_l_2",
+      "name": "Tromino L (left)",
+      "cells": [[0, 0], [0, 1], [-1, 1]],
+      "weight": 5
+    },
+    {
+      "id": "tromino_l_3",
+      "name": "Tromino L (up-right)",
+      "cells": [[0, 0], [1, 0], [1, 1]],
+      "weight": 5
+    },
+    {
+      "id": "tromino_l_4",
+      "name": "Tromino L (up-left)",
+      "cells": [[0, 0], [1, 0], [0, 1]],
+      "weight": 5
+    },
+    {
+      "id": "tetro_i_h",
+      "name": "Tetromino I Horizontal",
+      "cells": [[0, 0], [1, 0], [2, 0], [3, 0]],
+      "weight": 4
+    },
+    {
+      "id": "tetro_i_v",
+      "name": "Tetromino I Vertical",
+      "cells": [[0, 0], [0, 1], [0, 2], [0, 3]],
+      "weight": 4
+    },
+    {
+      "id": "tetro_o",
+      "name": "Tetromino O (square)",
+      "cells": [[0, 0], [1, 0], [0, 1], [1, 1]],
+      "weight": 4
+    },
+    {
+      "id": "tetro_t_up",
+      "name": "Tetromino T (up)",
+      "cells": [[0, 0], [1, 0], [2, 0], [1, 1]],
+      "weight": 3
+    },
+    {
+      "id": "tetro_t_down",
+      "name": "Tetromino T (down)",
+      "cells": [[1, 0], [0, 1], [1, 1], [2, 1]],
+      "weight": 3
+    },
+    {
+      "id": "tetro_t_left",
+      "name": "Tetromino T (left)",
+      "cells": [[0, 0], [0, 1], [-1, 1], [0, 2]],
+      "weight": 3
+    },
+    {
+      "id": "tetro_t_right",
+      "name": "Tetromino T (right)",
+      "cells": [[0, 0], [0, 1], [1, 1], [0, 2]],
+      "weight": 3
+    },
+    {
+      "id": "tetro_l_1",
+      "name": "Tetromino L (1)",
+      "cells": [[0, 0], [0, 1], [0, 2], [1, 2]],
+      "weight": 3
+    },
+    {
+      "id": "tetro_l_2",
+      "name": "Tetromino L (2)",
+      "cells": [[0, 0], [0, 1], [0, 2], [-1, 2]],
+      "weight": 3
+    },
+    {
+      "id": "tetro_s_1",
+      "name": "Tetromino S (1)",
+      "cells": [[1, 0], [2, 0], [0, 1], [1, 1]],
+      "weight": 3
+    },
+    {
+      "id": "tetro_s_2",
+      "name": "Tetromino S (2)",
+      "cells": [[0, 0], [1, 0], [1, 1], [2, 1]],
+      "weight": 3
+    },
+    {
+      "id": "pento_plus",
+      "name": "Pentomino Plus",
+      "cells": [[1, 0], [0, 1], [1, 1], [2, 1], [1, 2]],
+      "weight": 2
+    },
+    {
+      "id": "big_square",
+      "name": "Big Square (3x3)",
+      "cells": [[0, 0], [1, 0], [2, 0], [0, 1], [1, 1], [2, 1], [0, 2], [1, 2], [2, 2]],
+      "weight": 1
+    }
+  ]
+}

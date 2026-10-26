@@ -1,0 +1,4 @@
+# Placeholder — sound effect files go here (.ogg format).
+# Expected files: piece_pickup.ogg, piece_place_valid.ogg,
+# piece_place_invalid.ogg, line_clear.ogg, combo_clear.ogg,
+# game_over.ogg, region_unlocked.ogg, button_tap.ogg

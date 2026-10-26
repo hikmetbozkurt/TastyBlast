@@ -1,0 +1,275 @@
+[gd_scene load_steps=12 format=3 uid="uid://gameover_scene"]
+
+[ext_resource type="Script" path="res://scripts/ui/GameOverUI.gd" id="1_gameover"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/game_over_bg.png" id="2_gameover_bg"]
+[ext_resource type="FontFile" path="res://assets/fonts/Fredoka-SemiBold.ttf" id="3_fredoka"]
+[ext_resource type="PackedScene" uid="uid://button_primary" path="res://scenes/ui_components/ButtonPrimary.tscn" id="4_btn_primary"]
+[ext_resource type="PackedScene" uid="uid://button_secondary" path="res://scenes/ui_components/ButtonSecondary.tscn" id="5_btn_secondary"]
+[ext_resource type="Script" path="res://scripts/ui/SafeAreaContainer.gd" id="6_safe_area"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+bg_color = Color(0.98, 0.95, 0.91, 0.96)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.36, 0.22, 0.13, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+shadow_color = Color(0, 0, 0, 0.25)
+shadow_size = 12
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_badge"]
+bg_color = Color(0.98, 0.88, 0.25, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.48, 0.26, 0.08, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_divider"]
+bg_color = Color(0.85, 0.78, 0.7, 0.8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbar_bg"]
+bg_color = Color(0.25, 0.16, 0.1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbar_fill"]
+bg_color = Color(0.92, 0.55, 0.15, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gameover")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_gameover_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="DimOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="SafeArea" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_safe_area")
+base_margins = Vector4(48, 24, 48, 32)
+
+[node name="ContentScroll" type="ScrollContainer" parent="SafeArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="SafeArea/ContentScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="ContentVBox" type="VBoxContainer" parent="SafeArea/ContentScroll/CenterContainer"]
+custom_minimum_size = Vector2(860, 0)
+layout_mode = 2
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="Title" type="Label" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(1, 0.94, 0.82, 1)
+theme_override_colors/font_outline_color = Color(0.24, 0.12, 0.05, 1)
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 64
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreCard" type="PanelContainer" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox"]
+custom_minimum_size = Vector2(760, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="Margin" type="MarginContainer" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 28
+
+[node name="CardVBox" type="VBoxContainer" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="NewHighScoreBadge" type="PanelContainer" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin/CardVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_badge")
+
+[node name="BadgeMargin" type="MarginContainer" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin/CardVBox/NewHighScoreBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 6
+
+[node name="BadgeLabel" type="Label" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin/CardVBox/NewHighScoreBadge/BadgeMargin"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.36, 0.18, 0.04, 1)
+theme_override_font_sizes/font_size = 24
+text = "🎉 NEW HIGH SCORE!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinalScoreBox" type="VBoxContainer" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin/CardVBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="FinalScoreHeader" type="Label" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin/CardVBox/FinalScoreBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.48, 0.32, 0.19, 1)
+theme_override_font_sizes/font_size = 22
+text = "FINAL SCORE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinalScoreValue" type="Label" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin/CardVBox/FinalScoreBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.88, 0.26, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0.24, 0.12, 0.05, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 58
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Divider" type="Panel" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin/CardVBox"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_divider")
+
+[node name="HighScoreBox" type="HBoxContainer" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin/CardVBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="HighScoreHeader" type="Label" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin/CardVBox/HighScoreBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.42, 0.28, 0.16, 1)
+theme_override_font_sizes/font_size = 24
+text = "HIGH SCORE:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighScoreValue" type="Label" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin/CardVBox/HighScoreBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.92, 0.55, 0.15, 1)
+theme_override_colors/font_outline_color = Color(0.24, 0.12, 0.05, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 28
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RegionProgressBox" type="VBoxContainer" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin/CardVBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="HeaderHBox" type="HBoxContainer" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin/CardVBox/RegionProgressBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="RegionProgressHeader" type="Label" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin/CardVBox/RegionProgressBox/HeaderHBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.42, 0.28, 0.16, 1)
+theme_override_font_sizes/font_size = 22
+text = "REGION PROGRESS:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RegionProgressValue" type="Label" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin/CardVBox/RegionProgressBox/HeaderHBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 22
+text = "0 / 100,000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RegionProgressBar" type="ProgressBar" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ScoreCard/Margin/CardVBox/RegionProgressBox"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_pbar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pbar_fill")
+max_value = 100000.0
+show_percentage = false
+
+[node name="Spacer" type="Control" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="ButtonsVBox" type="VBoxContainer" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PlayAgainButton" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ButtonsVBox" instance=ExtResource("4_btn_primary")]
+layout_mode = 2
+text_label = "PLAY AGAIN"
+
+[node name="MenuButton" parent="SafeArea/ContentScroll/CenterContainer/ContentVBox/ButtonsVBox" instance=ExtResource("5_btn_secondary")]
+layout_mode = 2
+text_label = "MAIN MENU"

@@ -1,0 +1,365 @@
+[gd_scene load_steps=10 format=3 uid="uid://in_game_modal_scene"]
+
+[ext_resource type="Script" path="res://scripts/ui/InGameModal.gd" id="1_modal_script"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/panels/panel_modal.png" id="2_panel_tex"]
+[ext_resource type="FontFile" path="res://assets/fonts/Fredoka-SemiBold.ttf" id="3_font"]
+[ext_resource type="PackedScene" uid="uid://button_primary" path="res://scenes/ui_components/ButtonPrimary.tscn" id="4_btn_primary"]
+[ext_resource type="PackedScene" uid="uid://button_secondary" path="res://scenes/ui_components/ButtonSecondary.tscn" id="5_btn_secondary"]
+[ext_resource type="Script" path="res://scripts/ui/SafeAreaContainer.gd" id="6_safe_area"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_toggle"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toggle_bg"]
+bg_color = Color(0.72, 0.64, 0.56, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.36, 0.22, 0.13, 1)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+corner_radius_bottom_left = 36
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toggle_knob"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.36, 0.22, 0.13, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_color = Color(0, 0, 0, 0.15)
+shadow_size = 4
+
+[node name="InGameModal" type="CanvasLayer"]
+process_mode = 3
+layer = 100
+script = ExtResource("1_modal_script")
+
+[node name="DimOverlay" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0, 0, 0, 0.6)
+
+[node name="SafeArea" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_safe_area")
+base_margins = Vector4(48, 24, 48, 32)
+
+[node name="ModalPanel" type="NinePatchRect" parent="SafeArea"]
+custom_minimum_size = Vector2(920, 1220)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -610.0
+offset_right = 460.0
+offset_bottom = 610.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = ExtResource("2_panel_tex")
+patch_margin_left = 120
+patch_margin_top = 370
+patch_margin_right = 120
+patch_margin_bottom = 240
+
+[node name="PauseContainer" type="Control" parent="SafeArea/ModalPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TitleLabel" type="Label" parent="SafeArea/ModalPanel/PauseContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 214.0
+offset_right = 300.0
+offset_bottom = 294.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_colors/font_color = Color(1, 0.94, 0.82, 1)
+theme_override_colors/font_outline_color = Color(0.24, 0.12, 0.05, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 60
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsVBox" type="VBoxContainer" parent="SafeArea/ModalPanel/PauseContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 450.0
+offset_right = 260.0
+offset_bottom = 850.0
+grow_horizontal = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="ResumeButton" parent="SafeArea/ModalPanel/PauseContainer/ButtonsVBox" instance=ExtResource("4_btn_primary")]
+layout_mode = 2
+text_label = "RESUME"
+
+[node name="MenuButton" parent="SafeArea/ModalPanel/PauseContainer/ButtonsVBox" instance=ExtResource("5_btn_secondary")]
+layout_mode = 2
+text_label = "MAIN MENU"
+
+[node name="SettingsContainer" type="Control" parent="SafeArea/ModalPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TitleLabel" type="Label" parent="SafeArea/ModalPanel/SettingsContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 214.0
+offset_right = 300.0
+offset_bottom = 294.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_colors/font_color = Color(1, 0.94, 0.82, 1)
+theme_override_colors/font_outline_color = Color(0.24, 0.12, 0.05, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 60
+text = "SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ControlsVBox" type="VBoxContainer" parent="SafeArea/ModalPanel/SettingsContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 350.0
+offset_right = 260.0
+offset_bottom = 980.0
+grow_horizontal = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="MusicRow" type="HBoxContainer" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox"]
+custom_minimum_size = Vector2(0, 88)
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox/MusicRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 36
+text = "Music"
+vertical_alignment = 1
+
+[node name="MusicToggle" type="CheckButton" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox/MusicRow"]
+custom_minimum_size = Vector2(120, 72)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_toggle")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_toggle")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_toggle")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_toggle")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_toggle")
+flat = true
+
+[node name="BgPanel" type="Panel" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox/MusicRow/MusicToggle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toggle_bg")
+
+[node name="Knob" type="Panel" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox/MusicRow/MusicToggle"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -20.0
+offset_right = 45.0
+offset_bottom = 20.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toggle_knob")
+
+[node name="MusicVolumeRow" type="HBoxContainer" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox"]
+custom_minimum_size = Vector2(0, 88)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MusicVolumeLabel" type="Label" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox/MusicVolumeRow"]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 36
+text = "Music Volume"
+vertical_alignment = 1
+
+[node name="MusicVolumeSlider" type="HSlider" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox/MusicVolumeRow"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+value = 70.0
+
+[node name="MusicVolumeValueLabel" type="Label" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox/MusicVolumeRow"]
+custom_minimum_size = Vector2(54, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_colors/font_color = Color(0.78, 0.44, 0.12, 1)
+theme_override_font_sizes/font_size = 36
+text = "70"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SFXRow" type="HBoxContainer" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox"]
+custom_minimum_size = Vector2(0, 88)
+layout_mode = 2
+
+[node name="SFXLabel" type="Label" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox/SFXRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 36
+text = "Sound Effects"
+vertical_alignment = 1
+
+[node name="SFXToggle" type="CheckButton" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox/SFXRow"]
+custom_minimum_size = Vector2(120, 72)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_toggle")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_toggle")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_toggle")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_toggle")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_toggle")
+flat = true
+
+[node name="BgPanel" type="Panel" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox/SFXRow/SFXToggle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toggle_bg")
+
+[node name="Knob" type="Panel" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox/SFXRow/SFXToggle"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -20.0
+offset_right = 45.0
+offset_bottom = 20.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toggle_knob")
+
+[node name="HapticsRow" type="HBoxContainer" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox"]
+custom_minimum_size = Vector2(0, 88)
+layout_mode = 2
+
+[node name="HapticsLabel" type="Label" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox/HapticsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 36
+text = "Vibration"
+vertical_alignment = 1
+
+[node name="HapticsToggle" type="CheckButton" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox/HapticsRow"]
+custom_minimum_size = Vector2(120, 72)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_toggle")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_toggle")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_toggle")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_toggle")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_toggle")
+flat = true
+
+[node name="BgPanel" type="Panel" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox/HapticsRow/HapticsToggle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toggle_bg")
+
+[node name="Knob" type="Panel" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox/HapticsRow/HapticsToggle"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -20.0
+offset_right = 45.0
+offset_bottom = 20.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toggle_knob")
+
+[node name="Spacer" type="Control" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="DoneButton" parent="SafeArea/ModalPanel/SettingsContainer/ControlsVBox" instance=ExtResource("4_btn_primary")]
+layout_mode = 2
+text_label = "DONE"

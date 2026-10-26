@@ -1,0 +1,38 @@
+# Godot 4.x
+.godot/
+
+# Export builds
+build/
+*.apk
+*.aab
+*.ipa
+*.zip
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+*.swp
+*.swo
+*~
+
+# Keystore / signing (never commit real signing keys)
+*.keystore
+*.jks
+*.p12
+*.mobileprovision
+*.provisionprofile
+
+# Ad unit IDs config override (if using a local-only override)
+ad_config_local.tres
+
+# Local export output, user data and signing presets
+export/
+.godot-user/
+export_presets.cfg
+
+# Not needed for the App Store build
+_unnecessary_for_app_store/

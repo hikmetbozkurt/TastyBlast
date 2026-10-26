@@ -1,0 +1,158 @@
+[gd_scene load_steps=8 format=3 uid="uid://notification_banner_scene"]
+
+[ext_resource type="Script" path="res://scripts/ui/NotificationBanner.gd" id="1_banner"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/panels/notification_banner.png" id="2_banner_tex"]
+[ext_resource type="FontFile" path="res://assets/fonts/Fredoka-SemiBold.ttf" id="3_fredoka"]
+[ext_resource type="Script" path="res://scripts/ui/SafeAreaContainer.gd" id="4_safe_area"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_banner"]
+atlas = ExtResource("2_banner_tex")
+region = Rect2(0, 318, 1024, 412)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_close_normal"]
+bg_color = Color(0.96, 0.90, 0.82, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.55, 0.35, 0.18, 0.95)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_close_pressed"]
+bg_color = Color(0.88, 0.78, 0.65, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.42, 0.25, 0.12, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[node name="NotificationBanner" type="CanvasLayer"]
+process_mode = 3
+layer = 90
+script = ExtResource("1_banner")
+
+[node name="SafeArea" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_safe_area")
+base_margins = Vector4(48, 24, 48, 0)
+
+[node name="BannerContainer" type="Control" parent="SafeArea"]
+custom_minimum_size = Vector2(780, 180)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -390.0
+offset_top = -220.0
+offset_right = 390.0
+offset_bottom = -40.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="BannerTexture" type="TextureRect" parent="SafeArea/BannerContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_banner")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="ContentMargin" type="MarginContainer" parent="SafeArea/BannerContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 114
+theme_override_constants/margin_bottom = 24
+
+[node name="VBox" type="VBoxContainer" parent="SafeArea/BannerContainer/ContentMargin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="HeaderHBox" type="HBoxContainer" parent="SafeArea/BannerContainer/ContentMargin/VBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="HeaderLabel" type="Label" parent="SafeArea/BannerContainer/ContentMargin/VBox/HeaderHBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.78, 0.24, 0.08, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.92, 0.95)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 36
+text = "NEW CUISINE UNLOCKED!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FlagTexture" type="TextureRect" parent="SafeArea/BannerContainer/ContentMargin/VBox/HeaderHBox"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RegionLabel" type="Label" parent="SafeArea/BannerContainer/ContentMargin/VBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.28, 0.16, 0.08, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.92, 0.95)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 26
+text = "France is now available on the World Map."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="CloseButton" type="Button" parent="SafeArea/BannerContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -110.0
+offset_top = 12.0
+offset_right = -14.0
+offset_bottom = 108.0
+grow_horizontal = 0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_close_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_close_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_close_pressed")
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0.45, 0.24, 0.10, 1)
+theme_override_colors/font_hover_color = Color(0.30, 0.16, 0.08, 1)
+theme_override_colors/font_pressed_color = Color(0.20, 0.10, 0.04, 1)
+text = "✕"
+
+

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BalanceConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/util/BalanceConfig.gd" id="1_balance"]
+
+[resource]
+script = ExtResource("1_balance")
+grid_width = 8
+grid_height = 8
+tray_size = 3
+points_per_cell = 10
+base_line_clear_bonus = 50
+combo_multipliers = Array[float]([1.0, 2.5, 4.0, 6.0, 8.0, 10.0])
+streak_bonus_per_step = 25
+max_streak_multiplier = 5.0
+min_piece_cells = 1
+max_piece_cells = 5

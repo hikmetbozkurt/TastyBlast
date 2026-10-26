@@ -1,0 +1,343 @@
+[gd_scene load_steps=13 format=3 uid="uid://how_to_play_modal_scene"]
+
+[ext_resource type="Script" path="res://scripts/ui/HowToPlayModal.gd" id="1_how_to_play"]
+[ext_resource type="FontFile" path="res://assets/fonts/Fredoka-SemiBold.ttf" id="2_fredoka"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/buttons/button_secondary.png" id="3_btn_sec"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/flags/flag_it.svg" id="4_flag_it"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/flags/flag_fr.svg" id="5_flag_fr"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/flags/flag_mx.svg" id="6_flag_mx"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/flags/flag_jp.svg" id="7_flag_jp"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/flags/flag_in.svg" id="8_flag_in"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/flags/flag_tr.svg" id="9_flag_tr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_close"]
+atlas = ExtResource("3_btn_sec")
+region = Rect2(50, 154, 413, 201)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.98, 0.95, 0.91, 0.96)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.36, 0.22, 0.13, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0, 0, 0, 0.22)
+shadow_size = 10
+shadow_offset = Vector2(0, 6)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_flat"]
+
+[node name="HowToPlayModal" type="Control"]
+visible = false
+z_index = 20
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+script = ExtResource("1_how_to_play")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.65)
+
+[node name="ModalBox" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(780, 1150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -390.0
+offset_top = -575.0
+offset_right = 390.0
+offset_bottom = 575.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="ModalBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 44
+theme_override_constants/margin_top = 52
+theme_override_constants/margin_right = 44
+theme_override_constants/margin_bottom = 48
+
+[node name="ModalVBox" type="VBoxContainer" parent="ModalBox/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="ModalBox/MarginContainer/ModalVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fredoka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.1, 0.035, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 48
+text = "HOW TO PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleSpacer" type="Control" parent="ModalBox/MarginContainer/ModalVBox"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ContentVBox" type="VBoxContainer" parent="ModalBox/MarginContainer/ModalVBox"]
+layout_mode = 2
+theme_override_constants/separation = 42
+
+[node name="PlaySection" type="VBoxContainer" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/PlaySection"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fredoka")
+theme_override_colors/font_color = Color(0.37, 0.23, 0.13, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.92, 0.8)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 36
+text = "PLAY"
+horizontal_alignment = 1
+
+[node name="Body" type="Label" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/PlaySection"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fredoka")
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 30
+text = "Place the food pieces on the board.
+Complete full rows or columns to clear blocks and earn points."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="CulinaryTourSection" type="VBoxContainer" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/CulinaryTourSection"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fredoka")
+theme_override_colors/font_color = Color(0.37, 0.23, 0.13, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.92, 0.8)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 36
+text = "CULINARY WORLD TOUR"
+horizontal_alignment = 1
+
+[node name="Body" type="Label" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/CulinaryTourSection"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fredoka")
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 30
+text = "Each country has its own progress.
+Earn points while playing a country to unlock the next destination."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="FlagSpacer" type="Control" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/CulinaryTourSection"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ProgressionHBox" type="HBoxContainer" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/CulinaryTourSection"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="FlagIT" type="TextureRect" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/CulinaryTourSection/ProgressionHBox"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("4_flag_it")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Arrow1" type="Label" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/CulinaryTourSection/ProgressionHBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fredoka")
+theme_override_colors/font_color = Color(0.77, 0.33, 0.0, 1)
+theme_override_font_sizes/font_size = 28
+text = "→"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FlagFR" type="TextureRect" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/CulinaryTourSection/ProgressionHBox"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("5_flag_fr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Arrow2" type="Label" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/CulinaryTourSection/ProgressionHBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fredoka")
+theme_override_colors/font_color = Color(0.77, 0.33, 0.0, 1)
+theme_override_font_sizes/font_size = 28
+text = "→"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FlagMX" type="TextureRect" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/CulinaryTourSection/ProgressionHBox"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("6_flag_mx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Arrow3" type="Label" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/CulinaryTourSection/ProgressionHBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fredoka")
+theme_override_colors/font_color = Color(0.77, 0.33, 0.0, 1)
+theme_override_font_sizes/font_size = 28
+text = "→"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FlagJP" type="TextureRect" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/CulinaryTourSection/ProgressionHBox"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("7_flag_jp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Arrow4" type="Label" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/CulinaryTourSection/ProgressionHBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fredoka")
+theme_override_colors/font_color = Color(0.77, 0.33, 0.0, 1)
+theme_override_font_sizes/font_size = 28
+text = "→"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FlagIN" type="TextureRect" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/CulinaryTourSection/ProgressionHBox"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("8_flag_in")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Arrow5" type="Label" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/CulinaryTourSection/ProgressionHBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fredoka")
+theme_override_colors/font_color = Color(0.77, 0.33, 0.0, 1)
+theme_override_font_sizes/font_size = 28
+text = "→"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FlagTR" type="TextureRect" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/CulinaryTourSection/ProgressionHBox"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("9_flag_tr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WorldMapSection" type="VBoxContainer" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/WorldMapSection"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fredoka")
+theme_override_colors/font_color = Color(0.37, 0.23, 0.13, 1)
+theme_override_colors/font_outline_color = Color(1, 0.98, 0.92, 0.8)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 36
+text = "WORLD MAP"
+horizontal_alignment = 1
+
+[node name="Body" type="Label" parent="ModalBox/MarginContainer/ModalVBox/ContentVBox/WorldMapSection"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fredoka")
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 30
+text = "Visit the World Map to check your progress and see which countries are available."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BottomSpacer" type="Control" parent="ModalBox/MarginContainer/ModalVBox"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CloseButtonAnchor" type="Control" parent="ModalBox/MarginContainer/ModalVBox"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="ModalBox/MarginContainer/ModalVBox/CloseButtonAnchor"]
+custom_minimum_size = Vector2(300, 120)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -60.0
+offset_right = 150.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+flat = true
+
+[node name="ButtonTexture" type="TextureRect" parent="ModalBox/MarginContainer/ModalVBox/CloseButtonAnchor/CloseButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_close")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="ModalBox/MarginContainer/ModalVBox/CloseButtonAnchor/CloseButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("2_fredoka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.1, 0.035, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 32
+text = "CLOSE"
+horizontal_alignment = 1
+vertical_alignment = 1

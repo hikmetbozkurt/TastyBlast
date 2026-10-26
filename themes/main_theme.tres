@@ -1,0 +1,92 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://main_theme"]
+
+[ext_resource type="FontFile" path="res://assets/fonts/Fredoka-SemiBold.ttf" id="1_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.973, 0.412, 0.208, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.25)
+shadow_size = 4
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 0.5, 0.3, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 6
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.8, 0.32, 0.15, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.2, 0.2, 0.26, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.35, 0.35, 0.45, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[resource]
+default_font = ExtResource("1_font")
+default_font_size = 40
+TitleXL/base_type = &"Label"
+TitleXL/font_sizes/font_size = 72
+Title/base_type = &"Label"
+Title/font_sizes/font_size = 60
+Heading/base_type = &"Label"
+Heading/font_sizes/font_size = 48
+Body/base_type = &"Label"
+Body/font_sizes/font_size = 40
+SecondaryBody/base_type = &"Label"
+SecondaryBody/font_sizes/font_size = 34
+ButtonText/base_type = &"Label"
+ButtonText/font_sizes/font_size = 40
+SmallText/base_type = &"Label"
+SmallText/font_sizes/font_size = 30
+ScoreText/base_type = &"Label"
+ScoreText/font_sizes/font_size = 52
+ScoreText/colors/font_color = Color(1, 0.945098, 0.780392, 1)
+ScoreText/colors/font_outline_color = Color(0.290196, 0.141176, 0.0941176, 1)
+ScoreText/constants/outline_size = 14
+ScoreText/colors/font_shadow_color = Color(0.141176, 0.0745098, 0.0509804, 0.42)
+ScoreText/constants/shadow_offset_x = 0
+ScoreText/constants/shadow_offset_y = 5
+ScoreText/constants/shadow_outline_size = 4
+ComboText/base_type = &"Label"
+ComboText/font_sizes/font_size = 48
+Button/styles/hover = SubResource("StyleBoxFlat_button_hover")
+Button/styles/normal = SubResource("StyleBoxFlat_button_normal")
+Button/styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_panel")

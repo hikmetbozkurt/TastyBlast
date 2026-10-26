@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://button_primary"]
+
+[ext_resource type="Script" path="res://scripts/ui/UIButton.gd" id="1_uibtn"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/buttons/button_primary.png" id="2_btn_tex"]
+[ext_resource type="FontFile" path="res://assets/fonts/Fredoka-SemiBold.ttf" id="3_font"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_primary"]
+atlas = ExtResource("2_btn_tex")
+region = Rect2(50, 154, 413, 201)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_btn"]
+
+[node name="ButtonPrimary" type="Button"]
+custom_minimum_size = Vector2(480, 144)
+offset_right = 480.0
+offset_bottom = 144.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_btn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_btn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_btn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_btn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
+flat = true
+script = ExtResource("1_uibtn")
+
+[node name="ButtonTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_primary")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.1, 0.035, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 40
+text = "PRIMARY"
+horizontal_alignment = 1
+vertical_alignment = 1

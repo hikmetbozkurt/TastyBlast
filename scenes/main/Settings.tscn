@@ -1,0 +1,973 @@
+[gd_scene load_steps=14 format=3 uid="uid://settings_scene"]
+
+[ext_resource type="Script" path="res://scripts/ui/SettingsUI.gd" id="1_settings"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/settings_screen_bg.png" id="2_settings_bg"]
+[ext_resource type="FontFile" path="res://assets/fonts/Fredoka-SemiBold.ttf" id="3_fredoka"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/buttons/button_primary.png" id="4_button_primary"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/buttons/button_secondary.png" id="5_button_secondary"]
+[ext_resource type="Script" path="res://scripts/ui/SafeAreaContainer.gd" id="6_safe_area"]
+[ext_resource type="PackedScene" uid="uid://how_to_play_modal_scene" path="res://scenes/ui_components/HowToPlayModal.tscn" id="7_how_to_play"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_primary"]
+atlas = ExtResource("4_button_primary")
+region = Rect2(50, 154, 413, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_secondary"]
+atlas = ExtResource("5_button_secondary")
+region = Rect2(50, 154, 413, 201)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_flat"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.98, 0.95, 0.91, 0.96)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.36, 0.22, 0.13, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0, 0, 0, 0.22)
+shadow_size = 10
+shadow_offset = Vector2(0, 6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_divider"]
+bg_color = Color(0.85, 0.78, 0.70, 0.8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toggle_bg"]
+bg_color = Color(0.72, 0.64, 0.56, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.36, 0.22, 0.13, 1)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+corner_radius_bottom_left = 36
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toggle_knob"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.36, 0.22, 0.13, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_color = Color(0, 0, 0, 0.15)
+shadow_size = 4
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_settings")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_settings_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="SafeArea" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_safe_area")
+base_margins = Vector4(70, 24, 70, 30)
+
+[node name="MainVBox" type="VBoxContainer" parent="SafeArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="SafeArea/MainVBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.10, 0.035, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 52
+text = "SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsPanel" type="PanelContainer" parent="SafeArea/MainVBox"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="PanelMargin" type="MarginContainer" parent="SafeArea/MainVBox/SettingsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 44
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 44
+theme_override_constants/margin_bottom = 24
+
+[node name="PanelVBox" type="VBoxContainer" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="AudioContainer" type="VBoxContainer" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="AudioHeader" type="Label" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/AudioContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.48, 0.32, 0.19, 1)
+theme_override_font_sizes/font_size = 22
+text = "AUDIO"
+
+[node name="MusicRow" type="HBoxContainer" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/AudioContainer"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/AudioContainer/MusicRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 36
+text = "Music"
+vertical_alignment = 1
+
+[node name="MusicToggle" type="CheckButton" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/AudioContainer/MusicRow"]
+custom_minimum_size = Vector2(120, 72)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+
+[node name="BgPanel" type="Panel" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/AudioContainer/MusicRow/MusicToggle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toggle_bg")
+
+[node name="Knob" type="Panel" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/AudioContainer/MusicRow/MusicToggle"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -20.0
+offset_right = 45.0
+offset_bottom = 20.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toggle_knob")
+
+[node name="MusicVolumeRow" type="HBoxContainer" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/AudioContainer"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MusicVolumeLabel" type="Label" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/AudioContainer/MusicVolumeRow"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 36
+text = "Music Volume"
+vertical_alignment = 1
+
+[node name="MusicVolumeSlider" type="HSlider" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/AudioContainer/MusicVolumeRow"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+value = 70.0
+
+[node name="MusicVolumeValueLabel" type="Label" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/AudioContainer/MusicVolumeRow"]
+custom_minimum_size = Vector2(54, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.78, 0.44, 0.12, 1)
+theme_override_font_sizes/font_size = 28
+text = "70"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SFXRow" type="HBoxContainer" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/AudioContainer"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+
+[node name="SFXLabel" type="Label" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/AudioContainer/SFXRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 36
+text = "Sound Effects"
+vertical_alignment = 1
+
+[node name="SFXToggle" type="CheckButton" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/AudioContainer/SFXRow"]
+custom_minimum_size = Vector2(120, 72)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+
+[node name="BgPanel" type="Panel" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/AudioContainer/SFXRow/SFXToggle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toggle_bg")
+
+[node name="Knob" type="Panel" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/AudioContainer/SFXRow/SFXToggle"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -20.0
+offset_right = 45.0
+offset_bottom = 20.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toggle_knob")
+
+[node name="Divider1" type="Panel" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_divider")
+
+[node name="GameplayContainer" type="VBoxContainer" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="GameplayHeader" type="Label" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/GameplayContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.48, 0.32, 0.19, 1)
+theme_override_font_sizes/font_size = 22
+text = "GAMEPLAY"
+
+[node name="HapticsRow" type="HBoxContainer" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/GameplayContainer"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+
+[node name="HapticsLabel" type="Label" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/GameplayContainer/HapticsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 36
+text = "Haptics"
+vertical_alignment = 1
+
+[node name="HapticsToggle" type="CheckButton" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/GameplayContainer/HapticsRow"]
+custom_minimum_size = Vector2(120, 72)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+
+[node name="BgPanel" type="Panel" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/GameplayContainer/HapticsRow/HapticsToggle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toggle_bg")
+
+[node name="Knob" type="Panel" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/GameplayContainer/HapticsRow/HapticsToggle"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -20.0
+offset_right = 45.0
+offset_bottom = 20.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toggle_knob")
+
+[node name="Divider2" type="Panel" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_divider")
+
+[node name="LanguageContainer" type="VBoxContainer" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LanguageHeader" type="Label" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/LanguageContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.48, 0.32, 0.19, 1)
+theme_override_font_sizes/font_size = 22
+text = "LANGUAGE"
+
+[node name="LanguageRow" type="HBoxContainer" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/LanguageContainer"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+
+[node name="LanguageLabel" type="Label" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/LanguageContainer/LanguageRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 36
+text = "Language"
+vertical_alignment = 1
+
+[node name="LanguageValueLabel" type="Label" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/LanguageContainer/LanguageRow"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.78, 0.44, 0.12, 1)
+theme_override_font_sizes/font_size = 36
+text = "English"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Divider3" type="Panel" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_divider")
+
+[node name="OtherContainer" type="VBoxContainer" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="OtherHeader" type="Label" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/OtherContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.48, 0.32, 0.19, 1)
+theme_override_font_sizes/font_size = 22
+text = "OTHER"
+
+[node name="OtherButtonsVBox" type="VBoxContainer" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/OtherContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HowToPlayButton" type="Button" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/OtherContainer/OtherButtonsVBox"]
+custom_minimum_size = Vector2(560, 110)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+
+[node name="ButtonTexture" type="TextureRect" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/OtherContainer/OtherButtonsVBox/HowToPlayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_secondary")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/OtherContainer/OtherButtonsVBox/HowToPlayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.10, 0.035, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
+text = "HOW TO PLAY ?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditsButton" type="Button" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/OtherContainer/OtherButtonsVBox"]
+custom_minimum_size = Vector2(560, 110)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+
+[node name="ButtonTexture" type="TextureRect" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/OtherContainer/OtherButtonsVBox/CreditsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_secondary")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/OtherContainer/OtherButtonsVBox/CreditsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.10, 0.035, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
+text = "CREDITS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrivacyButton" type="Button" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/OtherContainer/OtherButtonsVBox"]
+custom_minimum_size = Vector2(560, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+
+[node name="ButtonTexture" type="TextureRect" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/OtherContainer/OtherButtonsVBox/PrivacyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_secondary")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/OtherContainer/OtherButtonsVBox/PrivacyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.10, 0.035, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
+text = "PRIVACY POLICY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResetButton" type="Button" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/OtherContainer/OtherButtonsVBox"]
+custom_minimum_size = Vector2(560, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+
+[node name="ButtonTexture" type="TextureRect" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/OtherContainer/OtherButtonsVBox/ResetButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_secondary")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="SafeArea/MainVBox/SettingsPanel/PanelMargin/PanelVBox/OtherContainer/OtherButtonsVBox/ResetButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.95, 0.25, 0.25, 1)
+theme_override_colors/font_outline_color = Color(0.25, 0.05, 0.05, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
+text = "RESET PROGRESS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButtonAnchor" type="Control" parent="SafeArea/MainVBox"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="SafeArea/MainVBox/BackButtonAnchor"]
+custom_minimum_size = Vector2(360, 120)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -48.0
+offset_right = 180.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+
+[node name="ButtonTexture" type="TextureRect" parent="SafeArea/MainVBox/BackButtonAnchor/BackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_secondary")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="SafeArea/MainVBox/BackButtonAnchor/BackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.10, 0.035, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 36
+text = "BACK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VersionLabel" type="Label" parent="SafeArea/MainVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.98, 0.94, 0.85, 0.85)
+theme_override_colors/font_outline_color = Color(0.18, 0.10, 0.05, 0.8)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 22
+text = "Version 1.0.0"
+horizontal_alignment = 1
+
+[node name="ResetConfirmDialog" type="Control" parent="."]
+visible = false
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Backdrop" type="ColorRect" parent="ResetConfirmDialog"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.65)
+
+[node name="DialogBox" type="PanelContainer" parent="ResetConfirmDialog"]
+custom_minimum_size = Vector2(740, 420)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -370.0
+offset_top = -210.0
+offset_right = 370.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="ResetConfirmDialog/DialogBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="DialogVBox" type="VBoxContainer" parent="ResetConfirmDialog/DialogBox/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="DialogTitle" type="Label" parent="ResetConfirmDialog/DialogBox/MarginContainer/DialogVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.88, 0.22, 0.22, 1)
+theme_override_colors/font_outline_color = Color(0.30, 0.05, 0.05, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "RESET PROGRESS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message1" type="Label" parent="ResetConfirmDialog/DialogBox/MarginContainer/DialogVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 30
+text = "Reset all game progress?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message2" type="Label" parent="ResetConfirmDialog/DialogBox/MarginContainer/DialogVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.55, 0.35, 0.20, 1)
+theme_override_font_sizes/font_size = 24
+text = "This action cannot be undone."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ActionsHBox" type="HBoxContainer" parent="ResetConfirmDialog/DialogBox/MarginContainer/DialogVBox"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="CancelButton" type="Button" parent="ResetConfirmDialog/DialogBox/MarginContainer/DialogVBox/ActionsHBox"]
+custom_minimum_size = Vector2(280, 120)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+
+[node name="ButtonTexture" type="TextureRect" parent="ResetConfirmDialog/DialogBox/MarginContainer/DialogVBox/ActionsHBox/CancelButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_secondary")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="ResetConfirmDialog/DialogBox/MarginContainer/DialogVBox/ActionsHBox/CancelButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.10, 0.035, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 32
+text = "CANCEL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmResetButton" type="Button" parent="ResetConfirmDialog/DialogBox/MarginContainer/DialogVBox/ActionsHBox"]
+custom_minimum_size = Vector2(280, 120)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+
+[node name="ButtonTexture" type="TextureRect" parent="ResetConfirmDialog/DialogBox/MarginContainer/DialogVBox/ActionsHBox/ConfirmResetButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_primary")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="ResetConfirmDialog/DialogBox/MarginContainer/DialogVBox/ActionsHBox/ConfirmResetButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(1, 0.88, 0.88, 1)
+theme_override_colors/font_outline_color = Color(0.40, 0.05, 0.05, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 32
+text = "RESET"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditsModal" type="Control" parent="."]
+visible = false
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Backdrop" type="ColorRect" parent="CreditsModal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.65)
+
+[node name="ModalBox" type="PanelContainer" parent="CreditsModal"]
+custom_minimum_size = Vector2(780, 1150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -390.0
+offset_top = -575.0
+offset_right = 390.0
+offset_bottom = 575.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="CreditsModal/ModalBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 32
+
+[node name="ModalVBox" type="VBoxContainer" parent="CreditsModal/ModalBox/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CreditsModal/ModalBox/MarginContainer/ModalVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.1, 0.035, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "CREDITS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CreditsModal/ModalBox/MarginContainer/ModalVBox"]
+custom_minimum_size = Vector2(0, 880)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="CreditsRichText" type="RichTextLabel" parent="CreditsModal/ModalBox/MarginContainer/ModalVBox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_fonts/normal_font = ExtResource("3_fredoka")
+theme_override_fonts/bold_font = ExtResource("3_fredoka")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[center][font_size=34][color=#7a4412][b]TastyBlast[/b][/color][/font_size]
+
+[font_size=28][color=#5e3b20][b]Development[/b][/color][/font_size]
+[font_size=24][color=#3d2414]Developed by Seanora[/color][/font_size]
+
+[font_size=28][color=#5e3b20][b]Music[/b][/color][/font_size]
+[font_size=24][color=#3d2414]Original music created for TastyBlast using Suno Pro.[/color][/font_size]
+
+[font_size=28][color=#5e3b20][b]Sound Effects[/b][/color][/font_size]
+[font_size=24][color=#3d2414]Sound effects used in the game are sourced from CC0 / public-domain licensed resources.[/color][/font_size]
+
+[font_size=28][color=#5e3b20][b]Visual Assets[/b][/color][/font_size]
+[font_size=24][color=#3d2414]Original and AI-assisted visual assets created specifically for TastyBlast.[/color][/font_size]
+
+[font_size=28][color=#5e3b20][b]Game Engine[/b][/color][/font_size]
+[font_size=24][color=#3d2414]TastyBlast is developed using Godot Engine.
+
+Godot Engine is free and open-source software licensed under the MIT License.
+
+Godot Engine License:
+[color=#c45500][url=https://godotengine.org/license][u]https://godotengine.org/license[/u][/url][/color][/color][/font_size]
+
+[font_size=28][color=#5e3b20][b]Copyright[/b][/color][/font_size]
+[font_size=24][color=#3d2414]© 2026 Seanora. All rights reserved.[/color][/font_size][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="CloseButtonAnchor" type="Control" parent="CreditsModal/ModalBox/MarginContainer/ModalVBox"]
+custom_minimum_size = Vector2(0, 88)
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CreditsModal/ModalBox/MarginContainer/ModalVBox/CloseButtonAnchor"]
+custom_minimum_size = Vector2(300, 120)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -44.0
+offset_right = 150.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+flat = true
+
+[node name="ButtonTexture" type="TextureRect" parent="CreditsModal/ModalBox/MarginContainer/ModalVBox/CloseButtonAnchor/CloseButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_secondary")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CreditsModal/ModalBox/MarginContainer/ModalVBox/CloseButtonAnchor/CloseButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.1, 0.035, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 32
+text = "CLOSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HowToPlayModal" parent="." instance=ExtResource("7_how_to_play")]
+layout_mode = 1

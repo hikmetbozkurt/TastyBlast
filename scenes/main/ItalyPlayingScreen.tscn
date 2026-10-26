@@ -1,0 +1,211 @@
+[gd_scene load_steps=10 format=3 uid="uid://italy_playing_screen"]
+
+[ext_resource type="Script" path="res://scripts/gameplay/GameUI.gd" id="1_gameui"]
+[ext_resource type="Script" path="res://scripts/gameplay/GridView.gd" id="2_gridview"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/italy_bg.png" id="3_italy_bg"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/board_frame_italy.png" id="4_board_frame_italy"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/pizza_counter.png" id="5_pizza_counter"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/buttons/icon_pause.png" id="6_icon_pause"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/buttons/icon_settings.png" id="7_icon_settings"]
+[ext_resource type="Script" path="res://scripts/ui/SafeAreaContainer.gd" id="8_safe_area"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grid_panel"]
+bg_color = Color(0.176471, 0.101961, 0.0666667, 0.6)
+
+[sub_resource type="Environment" id="Environment_glow"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.8
+glow_strength = 1.0
+glow_bloom = 0.25
+glow_blend_mode = 0
+
+[node name="ItalyPlayingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_gameui")
+board_frame_path = NodePath("PlayingArea/BoardRoot/BoardFrame")
+grid_view_path = NodePath("PlayingArea/BoardRoot/GridContainer/GridView")
+active_region_id = "italy"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_glow")
+
+[node name="KitchenBackground" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_italy_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="PlayingArea" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 220.0
+offset_bottom = -290.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BoardRoot" type="Control" parent="PlayingArea"]
+custom_minimum_size = Vector2(1008, 1008)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -504.0
+offset_top = -504.0
+offset_right = 504.0
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BoardFrame" type="TextureRect" parent="PlayingArea/BoardRoot"]
+custom_minimum_size = Vector2(1008, 1008)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_board_frame_italy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridBackgroundPanel" type="PanelContainer" parent="PlayingArea/BoardRoot"]
+clip_children = 2
+custom_minimum_size = Vector2(768, 768)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -384.0
+offset_right = 384.0
+offset_bottom = 384.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_grid_panel")
+
+[node name="GridContainer" type="Node2D" parent="PlayingArea/BoardRoot"]
+position = Vector2(120, 120)
+
+[node name="GridView" type="Node2D" parent="PlayingArea/BoardRoot/GridContainer"]
+script = ExtResource("2_gridview")
+
+[node name="SafeArea" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("8_safe_area")
+base_margins = Vector4(0, 24, 0, 40)
+[node name="HeaderContainer" type="VBoxContainer" parent="SafeArea"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 32.0
+offset_top = 92.0
+offset_right = -32.0
+offset_bottom = 384.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="HeaderBar" type="HBoxContainer" parent="SafeArea/HeaderContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="PauseButton" type="TextureButton" parent="SafeArea/HeaderContainer/HeaderBar"]
+custom_minimum_size = Vector2(144, 144)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("6_icon_pause")
+ignore_texture_size = true
+stretch_mode = 5
+pivot_offset = Vector2(72, 72)
+
+[node name="PizzaIcon" type="TextureRect" parent="SafeArea/HeaderContainer/HeaderBar"]
+custom_minimum_size = Vector2(208, 208)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("5_pizza_counter")
+expand_mode = 1
+stretch_mode = 5
+pivot_offset = Vector2(104, 104)
+
+[node name="SettingsButton" type="TextureButton" parent="SafeArea/HeaderContainer/HeaderBar"]
+custom_minimum_size = Vector2(144, 144)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("7_icon_settings")
+ignore_texture_size = true
+stretch_mode = 5
+pivot_offset = Vector2(72, 72)
+
+[node name="ScoreLabel" type="Label" parent="SafeArea/HeaderContainer"]
+custom_minimum_size = Vector2(480, 82)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.945098, 0.780392, 1)
+theme_override_colors/font_outline_color = Color(0.290196, 0.141176, 0.0941176, 1)
+theme_override_colors/font_shadow_color = Color(0.141176, 0.0745098, 0.0509804, 0.42)
+theme_override_constants/outline_size = 14
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 74
+theme_type_variation = &"ScoreText"
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TrayContainer" type="HBoxContainer" parent="SafeArea"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -380.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+
+[node name="DragOverlay" type="Node2D" parent="."]
+
+[node name="FlyingLayer" type="CanvasLayer" parent="."]
+layer = 100

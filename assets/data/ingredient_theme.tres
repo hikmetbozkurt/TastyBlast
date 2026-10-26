@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="IngredientTheme" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/util/IngredientTheme.gd" id="1_ingtheme"]
+
+[resource]
+script = ExtResource("1_ingtheme")
+active_mode = "themed"
+placeholder_sprites = {
+"blue": "res://assets/art/ingredients/_placeholder/blue.png",
+"brown": "res://assets/art/ingredients/_placeholder/brown.png",
+"green": "res://assets/art/ingredients/_placeholder/green.png",
+"orange": "res://assets/art/ingredients/_placeholder/orange.png",
+"purple": "res://assets/art/ingredients/_placeholder/purple.png",
+"red": "res://assets/art/ingredients/_placeholder/red.png",
+"yellow": "res://assets/art/ingredients/_placeholder/yellow.png"
+}
+themed_sprites = {
+"basil": "res://assets/art/ingredients/italy/italy_basil.png",
+"cheese": "res://assets/art/ingredients/italy/italy_cheese.png",
+"eggplant": "res://assets/art/ingredients/italy/italy_eggplant.png",
+"olive": "res://assets/art/ingredients/italy/italy_olive.png",
+"pepper": "res://assets/art/ingredients/italy/italy_pepper.png",
+"tomato": "res://assets/art/ingredients/italy/italy_tomato.png"
+}

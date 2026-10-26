@@ -1,0 +1,233 @@
+[gd_scene load_steps=10 format=3 uid="uid://restaurant_scene"]
+
+[ext_resource type="Script" path="res://scripts/ui/RestaurantProgressUI.gd" id="1_progress"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/worldmap_bg.png" id="2_worldmap_bg"]
+[ext_resource type="FontFile" path="res://assets/fonts/Fredoka-SemiBold.ttf" id="3_fredoka"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/buttons/button_secondary.png" id="4_button_secondary"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/pizza_counter.png" id="5_pizza_counter"]
+[ext_resource type="Script" path="res://scripts/ui/SafeAreaContainer.gd" id="6_safe_area"]
+[ext_resource type="PackedScene" uid="uid://how_to_play_modal_scene" path="res://scenes/ui_components/HowToPlayModal.tscn" id="7_how_to_play"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_help_normal"]
+bg_color = Color(0.98, 0.92, 0.82, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.42, 0.26, 0.14, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+shadow_color = Color(0, 0, 0, 0.12)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_help_pressed"]
+bg_color = Color(0.88, 0.80, 0.70, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.32, 0.18, 0.08, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_score_badge"]
+bg_color = Color(0.98, 0.92, 0.82, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.42, 0.26, 0.14, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_color = Color(0, 0, 0, 0.12)
+shadow_size = 6
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_button_back"]
+atlas = ExtResource("4_button_secondary")
+region = Rect2(50, 154, 413, 201)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_button"]
+
+[node name="RestaurantProgress" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_progress")
+region_container_path = NodePath("SafeArea/MainVBox/ScrollContainer/RegionList")
+regional_scores_grid_path = NodePath("SafeArea/MainVBox/HeaderContainer/RegionalScoresGrid")
+back_button_path = NodePath("SafeArea/MainVBox/BackButtonAnchor/BackButton")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_worldmap_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="SafeArea" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_safe_area")
+base_margins = Vector4(70, 24, 70, 30)
+
+[node name="MainVBox" type="VBoxContainer" parent="SafeArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="HeaderContainer" type="VBoxContainer" parent="SafeArea/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="TitleHBox" type="HBoxContainer" parent="SafeArea/MainVBox/HeaderContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="TitleSpacer" type="Control" parent="SafeArea/MainVBox/HeaderContainer/TitleHBox"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TitleLabel" type="Label" parent="SafeArea/MainVBox/HeaderContainer/TitleHBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(0.28, 0.16, 0.08, 1)
+theme_override_colors/font_outline_color = Color(0.98, 0.94, 0.85, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 50
+text = "CULINARY WORLD TOUR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HelpButton" type="Button" parent="SafeArea/MainVBox/HeaderContainer/TitleHBox"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_help_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_help_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_help_pressed")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.42, 0.26, 0.14, 1)
+theme_override_colors/font_hover_color = Color(0.28, 0.16, 0.08, 1)
+theme_override_colors/font_pressed_color = Color(0.20, 0.10, 0.04, 1)
+text = "?"
+
+[node name="RegionalScoresGrid" type="GridContainer" parent="SafeArea/MainVBox/HeaderContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+theme_override_constants/h_separation = 14
+theme_override_constants/v_separation = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SafeArea/MainVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+
+
+[node name="RegionList" type="VBoxContainer" parent="SafeArea/MainVBox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="BackButtonAnchor" type="Control" parent="SafeArea/MainVBox"]
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 2
+
+
+
+[node name="BackButton" type="Button" parent="SafeArea/MainVBox/BackButtonAnchor"]
+custom_minimum_size = Vector2(360, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -50.0
+offset_right = 180.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_button")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+[node name="ButtonTexture" type="TextureRect" parent="SafeArea/MainVBox/BackButtonAnchor/BackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_button_back")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="SafeArea/MainVBox/BackButtonAnchor/BackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("3_fredoka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.10, 0.035, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 36
+text = "BACK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HowToPlayModal" parent="." instance=ExtResource("7_how_to_play")]
+layout_mode = 1

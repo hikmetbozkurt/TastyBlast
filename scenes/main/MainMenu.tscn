@@ -1,0 +1,253 @@
+[gd_scene load_steps=11 format=3 uid="uid://mainmenu_scene"]
+
+[ext_resource type="Script" path="res://scripts/ui/MainMenu.gd" id="1_mainmenu"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/main_menu_bg.png" id="2_mainmenu_bg"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/logo_tastyblast.png" id="3_logo_tastyblast"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/buttons/button_primary.png" id="4_button_primary"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/buttons/button_secondary.png" id="5_button_secondary"]
+[ext_resource type="FontFile" path="res://assets/fonts/Fredoka-SemiBold.ttf" id="6_fredoka"]
+[ext_resource type="Script" path="res://scripts/ui/SafeAreaContainer.gd" id="7_safe_area"]
+
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_primary"]
+atlas = ExtResource("4_button_primary")
+region = Rect2(50, 154, 413, 201)
+
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_secondary"]
+atlas = ExtResource("5_button_secondary")
+region = Rect2(50, 154, 413, 201)
+
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_button"]
+
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mainmenu")
+
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_mainmenu_bg")
+expand_mode = 1
+stretch_mode = 6
+
+
+[node name="SafeArea" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("7_safe_area")
+base_margins = Vector4(40, 24, 40, 32)
+
+[node name="GameLogo" type="TextureRect" parent="SafeArea"]
+custom_minimum_size = Vector2(650, 650)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -325.0
+offset_top = -90.0
+offset_right = 325.0
+offset_bottom = 560.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("3_logo_tastyblast")
+expand_mode = 1
+stretch_mode = 5
+pivot_offset = Vector2(325, 325)
+
+
+[node name="VBox" type="VBoxContainer" parent="SafeArea"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = 70.0
+offset_right = 300.0
+offset_bottom = 850.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 22
+alignment = 1
+
+
+[node name="HighScoreLabel" type="Label" parent="SafeArea/VBox"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.98, 0.85, 0.25, 1)
+theme_override_colors/font_outline_color = Color(0.18, 0.1, 0.05, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 28
+theme_type_variation = &"SecondaryBody"
+text = "High Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="PlayButton" type="Button" parent="SafeArea/VBox"]
+custom_minimum_size = Vector2(520, 253)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_button")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+
+[node name="ButtonTexture" type="TextureRect" parent="SafeArea/VBox/PlayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_primary")
+expand_mode = 1
+stretch_mode = 0
+
+
+[node name="Label" type="Label" parent="SafeArea/VBox/PlayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("6_fredoka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.10, 0.035, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 52
+text = "PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="WorldMapButton" type="Button" parent="SafeArea/VBox"]
+custom_minimum_size = Vector2(460, 224)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_button")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+
+[node name="ButtonTexture" type="TextureRect" parent="SafeArea/VBox/WorldMapButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_secondary")
+expand_mode = 1
+stretch_mode = 0
+
+
+[node name="Label" type="Label" parent="SafeArea/VBox/WorldMapButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("6_fredoka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.10, 0.035, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 40
+text = "WORLD MAP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="SettingsButton" type="Button" parent="SafeArea/VBox"]
+custom_minimum_size = Vector2(460, 224)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_button")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+
+[node name="ButtonTexture" type="TextureRect" parent="SafeArea/VBox/SettingsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_secondary")
+expand_mode = 1
+stretch_mode = 0
+
+
+[node name="Label" type="Label" parent="SafeArea/VBox/SettingsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("6_fredoka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.10, 0.035, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 40
+text = "SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
